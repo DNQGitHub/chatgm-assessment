@@ -1,9 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NativeBaseProvider } from 'native-base';
 import { ScreenHome } from './screens';
+import { ToDoProvider } from '../todo/contexts/todo-context/provider';
 
 export const App = () => {
-  return (
-    <ScreenHome />
-  );
-}
+    return (
+        <NativeBaseProvider>
+            <ToDoProvider>
+                <ScreenHome />
+            </ToDoProvider>
+        </NativeBaseProvider>
+    );
+};
