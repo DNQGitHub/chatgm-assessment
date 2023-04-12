@@ -15,7 +15,7 @@ export const ButtonEditTodo = () => {
             <Modal isOpen={showModal} onClose={setShowModal} colorScheme={'gray'}>
                 <Modal.Content>
                     <Modal.CloseButton />
-                    <Modal.Header>Edit New Todo</Modal.Header>
+                    <Modal.Header>Edit Todo</Modal.Header>
                     <Modal.Body>
                         <View>
                             <FormControl isInvalid={!!form.errors.name}>

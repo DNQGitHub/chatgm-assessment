@@ -3,9 +3,10 @@ import { ButtonEditTodo } from '../button-edit-todo';
 import { ButtonDeleteTodo } from '../button-delete-todo';
 import { useToDoContext } from '../../contexts';
 import { EditToDoProvider } from '../../contexts/edit-todo-context/provider';
+import { DeleteToDoProvider } from '../../contexts/delete-todo-context/provider';
 
 export const ListTodos = () => {
-    const { todos } = useToDoContext();
+    const { todos, checkTodoDone } = useToDoContext();
 
     return (
         <FlatList
@@ -22,7 +23,15 @@ export const ListTodos = () => {
                     marginBottom={'8px'}
                 >
                     <Row flexDirection={'row'} style={{ gap: 8 }}>
-                        <Checkbox value="true" accessibilityLabel="Todo checkbox" colorScheme={'gray'} />
+                        <Checkbox
+                            value="true"
+                            onChange={(checked) => {
+                                checkTodoDone(item.id, checked);
+                            }}
+                            accessibilityLabel="Todo checkbox"
+                            colorScheme={'gray'}
+                            isChecked={item.isDone}
+                        />
                         <Text>{item.name}</Text>
                     </Row>
 
@@ -31,7 +40,9 @@ export const ListTodos = () => {
                             <ButtonEditTodo />
                         </EditToDoProvider>
 
-                        <ButtonDeleteTodo />
+                        <DeleteToDoProvider todo={item}>
+                            <ButtonDeleteTodo />
+                        </DeleteToDoProvider>
                     </Row>
                 </Row>
             )}
