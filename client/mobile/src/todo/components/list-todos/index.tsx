@@ -2,6 +2,7 @@ import { Checkbox, FlatList, Pressable, Row, Text } from 'native-base';
 import { ButtonEditTodo } from '../button-edit-todo';
 import { ButtonDeleteTodo } from '../button-delete-todo';
 import { useToDoContext } from '../../contexts';
+import { EditToDoProvider } from '../../contexts/edit-todo-context/provider';
 
 export const ListTodos = () => {
     const { todos } = useToDoContext();
@@ -26,7 +27,9 @@ export const ListTodos = () => {
                     </Row>
 
                     <Row flexDirection={'row'} style={{ gap: 8 }}>
-                        <ButtonEditTodo />
+                        <EditToDoProvider todo={item}>
+                            <ButtonEditTodo />
+                        </EditToDoProvider>
 
                         <ButtonDeleteTodo />
                     </Row>

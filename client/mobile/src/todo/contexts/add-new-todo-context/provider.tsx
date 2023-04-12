@@ -27,14 +27,12 @@ export const AddNewToDoProvider = (props: PropsWithChildren) => {
 
     const handleSubmit = (values: AddNewToDoFormValues) => {
         try {
-            console.log('handleSubmit', { values });
             setState(() => AddNewToDoState.SUBMITING);
 
             addTodo({ ...values, id: Uuid(), isDone: false });
 
             setState(() => AddNewToDoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {
-            console.log('handleSubmit', { error });
             setError(error.toString());
             setState(() => AddNewToDoState.SUBMIT_FAILED);
         }

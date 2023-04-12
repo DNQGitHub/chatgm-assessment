@@ -6,7 +6,6 @@ export const ToDoProvider = (props: PropsWithChildren) => {
     const [todos, setTodos] = React.useState<Array<{ id: string; name: string; isDone: boolean }>>([]);
 
     const addTodo = (todo: { id: string; name: string; isDone: boolean }) => {
-        console.log('addTodo', { todo });
         setTodos((curTodos) => [todo, ...curTodos]);
     };
 
