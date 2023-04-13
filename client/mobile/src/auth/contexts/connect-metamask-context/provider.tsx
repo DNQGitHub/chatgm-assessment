@@ -1,21 +1,21 @@
 import { ConnectMetamaskContext, ConnectMetamaskState, useAuthContext } from '@auth/contexts';
-// import MetaMaskSDK from '@metamask/sdk';
+import MetaMaskSDK from '@metamask/sdk';
 import React, { PropsWithChildren } from 'react';
 import { Linking } from 'react-native';
-// import BackgroundTimer from 'react-native-background-timer';
+import BackgroundTimer from 'react-native-background-timer';
 
-// const metamaskSdk = new MetaMaskSDK({
-//     openDeeplink: (link) => {
-//         Linking.openURL(link);
-//     },
-//     timer: BackgroundTimer,
-//     dappMetadata: {
-//         name: "Q's TODO",
-//         url: 'https://www.google.com',
-//     },
-// });
+const metamaskSdk = new MetaMaskSDK({
+    openDeeplink: (link) => {
+        Linking.openURL(link);
+    },
+    timer: BackgroundTimer,
+    dappMetadata: {
+        name: "Q's TODO",
+        url: 'https://www.google.com',
+    },
+});
 
-// const ethereum = metamaskSdk.getProvider();
+const ethereum = metamaskSdk.getProvider();
 
 export const ConnectMetamaskProvider = (props: PropsWithChildren) => {
     const { children } = props;
@@ -27,8 +27,8 @@ export const ConnectMetamaskProvider = (props: PropsWithChildren) => {
 
     const handleConnect = async () => {
         console.log('handleConnect');
-        // const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        // console.log({ accounts });
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        console.log({ accounts });
     };
 
     return (
