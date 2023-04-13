@@ -1,1 +1,1 @@
-export * from './button-connect';
+export * from './button-connect-wallet';

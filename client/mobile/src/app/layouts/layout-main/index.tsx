@@ -1,8 +1,9 @@
 import { PropsWithChildren } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Row, Column, Text, Button } from 'native-base';
+import { Row, Column, Text } from 'native-base';
 import { SafeAreaView } from 'react-native';
-import { ButtonConnect } from '../../../auth/components';
+import { ButtonConnectWallet } from '@auth/components';
+import { ConnectWalletProvider } from '@auth/contexts/connect-wallet-context/provider';
 
 export const LayoutMain = (props: PropsWithChildren) => {
     const { children } = props;
@@ -14,7 +15,9 @@ export const LayoutMain = (props: PropsWithChildren) => {
                     Q's TODO
                 </Text>
 
-                <ButtonConnect />
+                <ConnectWalletProvider>
+                    <ButtonConnectWallet />
+                </ConnectWalletProvider>
             </Row>
 
             <Column flex={1}>{children}</Column>
