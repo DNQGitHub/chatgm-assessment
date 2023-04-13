@@ -19,3 +19,13 @@ export interface AuthContextValue {
 }
 
 export const AuthContext = React.createContext<AuthContextValue>({} as AuthContextValue);
+
+export const useAuthContext = () => {
+    const context = React.useContext(AuthContext);
+
+    if (!context) {
+        throw new Error('Missing wrap with AuthContext.Provider');
+    }
+
+    return context;
+};
