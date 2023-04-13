@@ -6,7 +6,7 @@ import { TodoModel } from '@todo/models';
 export const DeleteTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) => {
     const { children, todo } = props;
 
-    const { deleteTodo } = useTodoContext();
+    const { handleDeleteTodo } = useTodoContext();
 
     const [modalVisible, setModalVisible] = React.useState(false);
     const [state, setState] = React.useState(DeleteTodoState.IDLE);
@@ -16,7 +16,7 @@ export const DeleteTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>
         try {
             setState(() => DeleteTodoState.SUBMITING);
 
-            deleteTodo(todo.id);
+            handleDeleteTodo(todo.id);
 
             setState(() => DeleteTodoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {

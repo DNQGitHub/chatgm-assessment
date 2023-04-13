@@ -8,7 +8,7 @@ export const TodoProvider = (props: PropsWithChildren) => {
     const { children } = props;
     const [todos, setTodos] = React.useState<Array<TodoModel>>([]);
 
-    const addTodo = (dto: AddNewTodoDto) => {
+    const handleAddTodo = (dto: AddNewTodoDto) => {
         const newTodo: TodoModel = {
             ...dto,
             id: Uuid(),
@@ -17,7 +17,7 @@ export const TodoProvider = (props: PropsWithChildren) => {
         setTodos((curTodos) => [newTodo, ...curTodos]);
     };
 
-    const editTodo = (todoId: string, dto: EditTodoDto) => {
+    const handleEditTodo = (todoId: string, dto: EditTodoDto) => {
         setTodos((curTodos) =>
             curTodos.map((i) => {
                 if (i.id == todoId) {
@@ -29,11 +29,11 @@ export const TodoProvider = (props: PropsWithChildren) => {
         );
     };
 
-    const deleteTodo = (todoId: string) => {
+    const handleDeleteTodo = (todoId: string) => {
         setTodos((curTodos) => curTodos.filter((i) => i.id != todoId));
     };
 
-    const checkTodoDone = (todoId: string, done: boolean) => {
+    const handleCheckTodoDone = (todoId: string, done: boolean) => {
         setTodos((curTodos) =>
             curTodos.map((i) => {
                 if (i.id == todoId) {
@@ -49,10 +49,10 @@ export const TodoProvider = (props: PropsWithChildren) => {
         <TodoContext.Provider
             value={{
                 todos,
-                addTodo,
-                editTodo,
-                checkTodoDone,
-                deleteTodo,
+                handleAddTodo,
+                handleEditTodo,
+                handleCheckTodoDone,
+                handleDeleteTodo,
             }}
         >
             {children}

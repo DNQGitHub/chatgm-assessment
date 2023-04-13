@@ -7,7 +7,7 @@ import { AddNewTodoDto, AddNewTodoDtoValidationSchema } from '@todo/dtos';
 export const AddNewTodoProvider = (props: PropsWithChildren) => {
     const { children } = props;
 
-    const { addTodo } = useTodoContext();
+    const { handleAddTodo } = useTodoContext();
 
     const [modalVisible, setModalVisible] = React.useState(false);
     const [state, setState] = React.useState(AddNewTodoState.IDLE);
@@ -26,7 +26,8 @@ export const AddNewTodoProvider = (props: PropsWithChildren) => {
         try {
             setState(() => AddNewTodoState.SUBMITING);
 
-            addTodo(dto);
+            handleAddTodo(dto);
+            form.resetForm();
 
             setState(() => AddNewTodoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {

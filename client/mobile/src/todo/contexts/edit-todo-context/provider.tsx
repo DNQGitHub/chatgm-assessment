@@ -9,7 +9,7 @@ import { TodoModel } from '@todo/models';
 export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) => {
     const { children, todo } = props;
 
-    const { editTodo } = useTodoContext();
+    const { handleEditTodo } = useTodoContext();
 
     const [modalVisible, setModalVisible] = React.useState(false);
     const [state, setState] = React.useState(EditTodoState.IDLE);
@@ -28,7 +28,7 @@ export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) 
         try {
             setState(() => EditTodoState.SUBMITING);
 
-            editTodo(todo.id, dto);
+            handleEditTodo(todo.id, dto);
 
             setState(() => EditTodoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {

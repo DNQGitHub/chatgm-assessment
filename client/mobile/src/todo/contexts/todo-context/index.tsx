@@ -5,10 +5,10 @@ import React from 'react';
 export interface TodoContextValue {
     todos: Array<TodoModel>;
 
-    addTodo: (todo: AddNewTodoDto) => void;
-    editTodo: (todoId: string, dto: EditTodoDto) => void;
-    deleteTodo: (todoId: string) => void;
-    checkTodoDone: (todoId: string, dto: boolean) => void;
+    handleAddTodo: (todo: AddNewTodoDto) => void;
+    handleEditTodo: (todoId: string, dto: EditTodoDto) => void;
+    handleDeleteTodo: (todoId: string) => void;
+    handleCheckTodoDone: (todoId: string, dto: boolean) => void;
 }
 
 export const TodoContext = React.createContext<TodoContextValue>({} as TodoContextValue);
