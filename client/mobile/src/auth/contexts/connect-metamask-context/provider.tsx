@@ -28,7 +28,8 @@ export const ConnectMetamaskProvider = (props: PropsWithChildren) => {
     const handleConnect = async () => {
         console.log('handleConnect');
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        console.log({ accounts });
+        const chainId = await ethereum.request({ method: 'eth_chainId' });
+        console.log({ accounts, chainId });
     };
 
     return (

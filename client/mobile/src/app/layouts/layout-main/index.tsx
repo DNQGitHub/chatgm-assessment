@@ -8,7 +8,7 @@ export const LayoutMain = (props: PropsWithChildren) => {
     const { children } = props;
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
             <Row paddingX={'20px'} paddingY={'16px'} backgroundColor={'gray.400'} justifyContent={'space-between'}>
                 <Text fontSize={'24px'} fontWeight={'bold'}>
                     Q's TODO
