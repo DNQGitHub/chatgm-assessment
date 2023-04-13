@@ -6,7 +6,7 @@ import { EditTodoProvider } from '@todo/contexts/edit-todo-context/provider';
 import { DeleteTodoProvider } from '@todo/contexts/delete-todo-context/provider';
 
 export const ListTodos = () => {
-    const { todos, checkTodoDone } = useTodoContext();
+    const { todos, handleCheckTodoDone } = useTodoContext();
 
     return (
         <FlatList
@@ -26,7 +26,7 @@ export const ListTodos = () => {
                         <Checkbox
                             value="true"
                             onChange={(checked) => {
-                                checkTodoDone(item.id, checked);
+                                handleCheckTodoDone(item.id, checked);
                             }}
                             accessibilityLabel="Todo checkbox"
                             colorScheme={'gray'}
