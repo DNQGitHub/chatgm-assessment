@@ -29,6 +29,7 @@ export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) 
             setState(() => EditTodoState.SUBMITING);
 
             handleEditTodo(todo.id, dto);
+            setModalVisible(() => false);
 
             setState(() => EditTodoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {

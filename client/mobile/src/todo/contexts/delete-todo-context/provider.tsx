@@ -17,6 +17,7 @@ export const DeleteTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>
             setState(() => DeleteTodoState.SUBMITING);
 
             handleDeleteTodo(todo.id);
+            setModalVisible(() => false);
 
             setState(() => DeleteTodoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {
