@@ -11,6 +11,7 @@ export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) 
 
     const { editTodo } = useTodoContext();
 
+    const [modalVisible, setModalVisible] = React.useState(false);
     const [state, setState] = React.useState(EditTodoState.IDLE);
     const [error, setError] = React.useState<string | null | undefined>(null);
     const form = useFormik<EditTodoDto>({
@@ -36,12 +37,19 @@ export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) 
         }
     };
 
+    const handleSetModalVisible = (visible: boolean) => {
+        setModalVisible(() => visible);
+    };
+
     return (
         <EditTodoContext.Provider
             value={{
                 state,
                 error,
                 form,
+                modalVisible,
+
+                handleSetModalVisible,
             }}
         >
             {children}

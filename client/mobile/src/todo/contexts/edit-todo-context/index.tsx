@@ -15,6 +15,9 @@ export interface EditTodoContextValue {
     state: EditTodoState;
     error: string | null | undefined;
     form: EditTodoForm;
+    modalVisible: boolean;
+
+    handleSetModalVisible: (visible: boolean) => void;
 }
 
 export const EditTodoContext = React.createContext<EditTodoContextValue>({} as EditTodoContextValue);

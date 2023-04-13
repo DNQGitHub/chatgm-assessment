@@ -1,5 +1,6 @@
 import { Checkbox, FlatList, Row, Text } from 'native-base';
-import { ButtonEditTodo, ButtonDeleteTodo } from '@todo/components';
+import { ButtonEditTodo } from '@todo/components/button-edit-todo';
+import { ButtonDeleteTodo } from '@todo/components/button-delete-todo';
 import { useTodoContext } from '@todo/contexts';
 import { EditTodoProvider } from '@todo/contexts/edit-todo-context/provider';
 import { DeleteTodoProvider } from '@todo/contexts/delete-todo-context/provider';

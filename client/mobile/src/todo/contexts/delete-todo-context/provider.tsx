@@ -8,6 +8,7 @@ export const DeleteTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>
 
     const { deleteTodo } = useTodoContext();
 
+    const [modalVisible, setModalVisible] = React.useState(false);
     const [state, setState] = React.useState(DeleteTodoState.IDLE);
     const [error, setError] = React.useState<string | null | undefined>(null);
 
@@ -24,14 +25,20 @@ export const DeleteTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>
         }
     };
 
+    const handleSetModalVisible = (visible: boolean) => {
+        setModalVisible(() => visible);
+    };
+
     return (
         <DeleteTodoContext.Provider
             value={{
                 state,
                 error,
                 todo,
+                modalVisible,
 
                 handleConfirm,
+                handleSetModalVisible,
             }}
         >
             {children}

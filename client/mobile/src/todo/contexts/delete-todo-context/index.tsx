@@ -12,8 +12,10 @@ export interface DeleteTodoContextValue {
     state: DeleteTodoState;
     error: string | null | undefined;
     todo: TodoModel;
+    modalVisible: boolean;
 
     handleConfirm: () => void;
+    handleSetModalVisible: (visible: boolean) => void;
 }
 
 export const DeleteTodoContext = React.createContext<DeleteTodoContextValue>({} as DeleteTodoContextValue);

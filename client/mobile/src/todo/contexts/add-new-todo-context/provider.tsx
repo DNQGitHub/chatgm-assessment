@@ -9,6 +9,7 @@ export const AddNewTodoProvider = (props: PropsWithChildren) => {
 
     const { addTodo } = useTodoContext();
 
+    const [modalVisible, setModalVisible] = React.useState(false);
     const [state, setState] = React.useState(AddNewTodoState.IDLE);
     const [error, setError] = React.useState<string | null | undefined>(null);
     const form = useFormik<AddNewTodoDto>({
@@ -34,12 +35,19 @@ export const AddNewTodoProvider = (props: PropsWithChildren) => {
         }
     };
 
+    const handleSetModalVisible = (visible: boolean) => {
+        setModalVisible(() => visible);
+    };
+
     return (
         <AddNewTodoContext.Provider
             value={{
                 state,
                 error,
                 form,
+
+                modalVisible,
+                handleSetModalVisible,
             }}
         >
             {children}

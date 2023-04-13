@@ -1,18 +1,17 @@
 import { Button, FormControl, Input, Modal, Pressable, Text, View } from 'native-base';
 import React from 'react';
-import { useEditTodoContext } from '../../contexts';
+import { useEditTodoContext } from '@todo/contexts';
 
 export const ButtonEditTodo = () => {
-    const [showModal, setShowModal] = React.useState(false);
-    const { form } = useEditTodoContext();
+    const { form, modalVisible, handleSetModalVisible } = useEditTodoContext();
 
     return (
         <>
-            <Pressable onPress={() => setShowModal(true)}>
+            <Pressable onPress={() => handleSetModalVisible(true)}>
                 <Text style={{ textDecorationLine: 'underline' }}>Edit</Text>
             </Pressable>
 
-            <Modal isOpen={showModal} onClose={setShowModal} colorScheme={'gray'}>
+            <Modal isOpen={modalVisible} onClose={handleSetModalVisible} colorScheme={'gray'}>
                 <Modal.Content>
                     <Modal.CloseButton />
                     <Modal.Header>Edit Todo</Modal.Header>
@@ -31,7 +30,7 @@ export const ButtonEditTodo = () => {
                                 variant="ghost"
                                 colorScheme="blueGray"
                                 onPress={() => {
-                                    setShowModal(false);
+                                    handleSetModalVisible(false);
                                 }}
                             >
                                 Cancel
