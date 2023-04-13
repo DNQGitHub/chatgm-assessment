@@ -1,21 +1,23 @@
+import { AddNewTodoDto, EditTodoDto } from '@todo/dtos';
+import { TodoModel } from '@todo/models';
 import React from 'react';
 
-export interface ToDoContextValue {
-    todos: Array<{ id: string; name: string; isDone: boolean }>;
+export interface TodoContextValue {
+    todos: Array<TodoModel>;
 
-    addTodo: (todo: { id: string; name: string; isDone: boolean }) => void;
-    editTodo: (todoId: string, data: { name: string }) => void;
+    addTodo: (todo: AddNewTodoDto) => void;
+    editTodo: (todoId: string, dto: EditTodoDto) => void;
     deleteTodo: (todoId: string) => void;
-    checkTodoDone: (todoId: string, done: boolean) => void;
+    checkTodoDone: (todoId: string, dto: boolean) => void;
 }
 
-export const ToDoContext = React.createContext<ToDoContextValue>({} as ToDoContextValue);
+export const TodoContext = React.createContext<TodoContextValue>({} as TodoContextValue);
 
-export const useToDoContext = () => {
-    const context = React.useContext(ToDoContext);
+export const useTodoContext = () => {
+    const context = React.useContext(TodoContext);
 
     if (!context) {
-        throw new Error('Missing wrap with ToDoContext.Provider');
+        throw new Error('Missing wrap with TodoContext.Provider');
     }
 
     return context;

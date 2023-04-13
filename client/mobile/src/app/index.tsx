@@ -1,13 +1,13 @@
 import { NativeBaseProvider } from 'native-base';
 import { ScreenHome } from './screens';
-import { ToDoProvider } from '../todo/contexts/todo-context/provider';
+import { TodoProvider } from '@todo/contexts/todo-context/provider';
 
 export const App = () => {
     return (
         <NativeBaseProvider>
-            <ToDoProvider>
+            <TodoProvider>
                 <ScreenHome />
-            </ToDoProvider>
+            </TodoProvider>
         </NativeBaseProvider>
     );
 };

@@ -1,45 +1,41 @@
 import { PropsWithChildren } from 'react';
-import { AddNewToDoContext, AddNewToDoFormValues, AddNewToDoState } from '.';
 import React from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { v4 as Uuid } from 'uuid';
-import { useToDoContext } from '../todo-context';
+import { AddNewTodoContext, AddNewTodoState, useTodoContext } from '@todo/contexts';
+import { AddNewTodoDto, AddNewTodoDtoValidationSchema } from '@todo/dtos';
 
-export const AddNewToDoProvider = (props: PropsWithChildren) => {
+export const AddNewTodoProvider = (props: PropsWithChildren) => {
     const { children } = props;
 
-    const { addTodo } = useToDoContext();
+    const { addTodo } = useTodoContext();
 
-    const [state, setState] = React.useState(AddNewToDoState.IDLE);
+    const [state, setState] = React.useState(AddNewTodoState.IDLE);
     const [error, setError] = React.useState<string | null | undefined>(null);
-    const form = useFormik<AddNewToDoFormValues>({
+    const form = useFormik<AddNewTodoDto>({
         initialValues: {
             name: '',
         },
         onSubmit: (values) => {
             handleSubmit(values);
         },
-        validationSchema: Yup.object({
-            name: Yup.string().required(),
-        }),
+        validationSchema: new AddNewTodoDtoValidationSchema(),
     });
 
-    const handleSubmit = (values: AddNewToDoFormValues) => {
+    const handleSubmit = (dto: AddNewTodoDto) => {
         try {
-            setState(() => AddNewToDoState.SUBMITING);
+            setState(() => AddNewTodoState.SUBMITING);
 
-            addTodo({ ...values, id: Uuid(), isDone: false });
+            addTodo(dto);
 
-            setState(() => AddNewToDoState.SUBMIT_SUCCEEDED);
+            setState(() => AddNewTodoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {
             setError(error.toString());
-            setState(() => AddNewToDoState.SUBMIT_FAILED);
+            setState(() => AddNewTodoState.SUBMIT_FAILED);
         }
     };
 
     return (
-        <AddNewToDoContext.Provider
+        <AddNewTodoContext.Provider
             value={{
                 state,
                 error,
@@ -47,6 +43,6 @@ export const AddNewToDoProvider = (props: PropsWithChildren) => {
             }}
         >
             {children}
-        </AddNewToDoContext.Provider>
+        </AddNewTodoContext.Provider>
     );
 };

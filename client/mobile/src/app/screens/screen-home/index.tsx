@@ -1,8 +1,8 @@
 import {} from 'react';
 import { LayoutMain } from '../../layouts';
 import { View } from 'native-base';
-import { ButtonAddNewToDo, ListTodos } from '../../../todo/components';
-import { AddNewToDoProvider } from '../../../todo/contexts/add-new-todo-context/provider';
+import { ButtonAddNewTodo, ListTodos } from '@todo/components';
+import { AddNewTodoProvider } from '@todo/contexts/add-new-todo-context/provider';
 
 export const ScreenHome = () => {
     return (
@@ -12,9 +12,9 @@ export const ScreenHome = () => {
             </View>
 
             <View position={'absolute'} right={30} bottom={30}>
-                <AddNewToDoProvider>
-                    <ButtonAddNewToDo />
-                </AddNewToDoProvider>
+                <AddNewTodoProvider>
+                    <ButtonAddNewTodo />
+                </AddNewTodoProvider>
             </View>
         </LayoutMain>
     );

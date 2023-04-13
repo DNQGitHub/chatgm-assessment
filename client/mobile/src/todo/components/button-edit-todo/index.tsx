@@ -1,10 +1,10 @@
 import { Button, FormControl, Input, Modal, Pressable, Text, View } from 'native-base';
 import React from 'react';
-import { useEditToDoContext } from '../../contexts';
+import { useEditTodoContext } from '../../contexts';
 
 export const ButtonEditTodo = () => {
     const [showModal, setShowModal] = React.useState(false);
-    const { form } = useEditToDoContext();
+    const { form } = useEditTodoContext();
 
     return (
         <>

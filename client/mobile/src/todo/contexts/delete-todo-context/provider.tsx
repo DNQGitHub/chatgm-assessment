@@ -1,33 +1,31 @@
 import { PropsWithChildren } from 'react';
-import { DeleteToDoContext, DeleteToDoState } from '.';
 import React from 'react';
-import { useToDoContext } from '../todo-context';
+import { DeleteTodoContext, DeleteTodoState, useTodoContext } from '@todo/contexts';
+import { TodoModel } from '@todo/models';
 
-export const DeleteToDoProvider = (
-    props: PropsWithChildren<{ todo: { id: string; name: string; isDone: boolean } }>,
-) => {
+export const DeleteTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) => {
     const { children, todo } = props;
 
-    const { deleteTodo } = useToDoContext();
+    const { deleteTodo } = useTodoContext();
 
-    const [state, setState] = React.useState(DeleteToDoState.IDLE);
+    const [state, setState] = React.useState(DeleteTodoState.IDLE);
     const [error, setError] = React.useState<string | null | undefined>(null);
 
     const handleConfirm = () => {
         try {
-            setState(() => DeleteToDoState.SUBMITING);
+            setState(() => DeleteTodoState.SUBMITING);
 
             deleteTodo(todo.id);
 
-            setState(() => DeleteToDoState.SUBMIT_SUCCEEDED);
+            setState(() => DeleteTodoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {
             setError(error.toString());
-            setState(() => DeleteToDoState.SUBMIT_FAILED);
+            setState(() => DeleteTodoState.SUBMIT_FAILED);
         }
     };
 
     return (
-        <DeleteToDoContext.Provider
+        <DeleteTodoContext.Provider
             value={{
                 state,
                 error,
@@ -37,6 +35,6 @@ export const DeleteToDoProvider = (
             }}
         >
             {children}
-        </DeleteToDoContext.Provider>
+        </DeleteTodoContext.Provider>
     );
 };

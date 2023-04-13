@@ -1,27 +1,28 @@
+import { TodoModel } from '@todo/models';
 import React from 'react';
 
-export enum DeleteToDoState {
+export enum DeleteTodoState {
     IDLE,
     SUBMITING,
     SUBMIT_FAILED,
     SUBMIT_SUCCEEDED,
 }
 
-export interface DeleteToDoContextValue {
-    state: DeleteToDoState;
+export interface DeleteTodoContextValue {
+    state: DeleteTodoState;
     error: string | null | undefined;
-    todo: { id: string; name: string; isDone: boolean };
+    todo: TodoModel;
 
     handleConfirm: () => void;
 }
 
-export const DeleteToDoContext = React.createContext<DeleteToDoContextValue>({} as DeleteToDoContextValue);
+export const DeleteTodoContext = React.createContext<DeleteTodoContextValue>({} as DeleteTodoContextValue);
 
-export const useDeleteToDoContext = () => {
-    const context = React.useContext(DeleteToDoContext);
+export const useDeleteTodoContext = () => {
+    const context = React.useContext(DeleteTodoContext);
 
     if (!context) {
-        throw new Error('Missing wrap with DeleteToDoContext.Provider');
+        throw new Error('Missing wrap with DeleteTodoContext.Provider');
     }
 
     return context;

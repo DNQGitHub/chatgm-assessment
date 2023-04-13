@@ -1,44 +1,43 @@
 import { PropsWithChildren } from 'react';
-import { EditToDoContext, EditToDoFormValues, EditToDoState } from '.';
 import React from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { useToDoContext } from '../todo-context';
+import { useTodoContext } from '../todo-context';
+import { EditTodoDto, EditTodoDtoValidationSchema } from '@todo/dtos';
+import { EditTodoContext, EditTodoState } from '@todo/contexts';
+import { TodoModel } from '@todo/models';
 
-export const EditToDoProvider = (props: PropsWithChildren<{ todo: { id: string; name: string; isDone: boolean } }>) => {
+export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) => {
     const { children, todo } = props;
 
-    const { editTodo } = useToDoContext();
+    const { editTodo } = useTodoContext();
 
-    const [state, setState] = React.useState(EditToDoState.IDLE);
+    const [state, setState] = React.useState(EditTodoState.IDLE);
     const [error, setError] = React.useState<string | null | undefined>(null);
-    const form = useFormik<EditToDoFormValues>({
+    const form = useFormik<EditTodoDto>({
         initialValues: {
             name: todo.name,
         },
         onSubmit: (values) => {
             handleSubmit(values);
         },
-        validationSchema: Yup.object({
-            name: Yup.string().required(),
-        }),
+        validationSchema: new EditTodoDtoValidationSchema(),
     });
 
-    const handleSubmit = (values: EditToDoFormValues) => {
+    const handleSubmit = (dto: EditTodoDto) => {
         try {
-            setState(() => EditToDoState.SUBMITING);
+            setState(() => EditTodoState.SUBMITING);
 
-            editTodo(todo.id, { ...values });
+            editTodo(todo.id, dto);
 
-            setState(() => EditToDoState.SUBMIT_SUCCEEDED);
+            setState(() => EditTodoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {
             setError(error.toString());
-            setState(() => EditToDoState.SUBMIT_FAILED);
+            setState(() => EditTodoState.SUBMIT_FAILED);
         }
     };
 
     return (
-        <EditToDoContext.Provider
+        <EditTodoContext.Provider
             value={{
                 state,
                 error,
@@ -46,6 +45,6 @@ export const EditToDoProvider = (props: PropsWithChildren<{ todo: { id: string; 
             }}
         >
             {children}
-        </EditToDoContext.Provider>
+        </EditTodoContext.Provider>
     );
 };

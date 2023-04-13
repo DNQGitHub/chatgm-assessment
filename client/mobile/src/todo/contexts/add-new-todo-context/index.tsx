@@ -1,32 +1,29 @@
 import { FormikProps } from 'formik';
 import React from 'react';
+import { AddNewTodoDto } from '@todo/dtos';
 
-export enum AddNewToDoState {
+export enum AddNewTodoState {
     IDLE,
     SUBMITING,
     SUBMIT_FAILED,
     SUBMIT_SUCCEEDED,
 }
 
-export type AddNewToDoFormValues = {
-    name: string;
-};
+export type AddNewTodoForm = FormikProps<AddNewTodoDto>;
 
-export type AddNewToDoForm = FormikProps<AddNewToDoFormValues>;
-
-export interface AddNewToDoContextValue {
-    state: AddNewToDoState;
+export interface AddNewTodoContextValue {
+    state: AddNewTodoState;
     error: string | null | undefined;
-    form: AddNewToDoForm;
+    form: AddNewTodoForm;
 }
 
-export const AddNewToDoContext = React.createContext<AddNewToDoContextValue>({} as AddNewToDoContextValue);
+export const AddNewTodoContext = React.createContext<AddNewTodoContextValue>({} as AddNewTodoContextValue);
 
-export const useAddNewToDoContext = () => {
-    const context = React.useContext(AddNewToDoContext);
+export const useAddNewTodoContext = () => {
+    const context = React.useContext(AddNewTodoContext);
 
     if (!context) {
-        throw new Error('Missing wrap with AddNewToDoContext.Provider');
+        throw new Error('Missing wrap with AddNewTodoContext.Provider');
     }
 
     return context;

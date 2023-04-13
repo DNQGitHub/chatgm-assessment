@@ -1,15 +1,15 @@
 import { Button, Text, View, Modal, FormControl, Input } from 'native-base';
 import React from 'react';
-import { useAddNewToDoContext } from '../../contexts';
+import { useAddNewTodoContext } from '../../contexts';
 
-export const ButtonAddNewToDo = () => {
+export const ButtonAddNewTodo = () => {
     const [showModal, setShowModal] = React.useState(false);
-    const { form } = useAddNewToDoContext();
+    const { form } = useAddNewTodoContext();
 
     return (
         <>
             <Button colorScheme={'gray'} onPress={() => setShowModal(true)}>
-                <Text color="white">+ New ToDo</Text>
+                <Text color="white">+ New Todo</Text>
             </Button>
 
             <Modal isOpen={showModal} onClose={setShowModal} colorScheme={'gray'}>

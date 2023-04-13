@@ -1,32 +1,29 @@
+import { EditTodoDto } from '@todo/dtos';
 import { FormikProps } from 'formik';
 import React from 'react';
 
-export enum EditToDoState {
+export enum EditTodoState {
     IDLE,
     SUBMITING,
     SUBMIT_FAILED,
     SUBMIT_SUCCEEDED,
 }
 
-export type EditToDoFormValues = {
-    name: string;
-};
+export type EditTodoForm = FormikProps<EditTodoDto>;
 
-export type EditToDoForm = FormikProps<EditToDoFormValues>;
-
-export interface EditToDoContextValue {
-    state: EditToDoState;
+export interface EditTodoContextValue {
+    state: EditTodoState;
     error: string | null | undefined;
-    form: EditToDoForm;
+    form: EditTodoForm;
 }
 
-export const EditToDoContext = React.createContext<EditToDoContextValue>({} as EditToDoContextValue);
+export const EditTodoContext = React.createContext<EditTodoContextValue>({} as EditTodoContextValue);
 
-export const useEditToDoContext = () => {
-    const context = React.useContext(EditToDoContext);
+export const useEditTodoContext = () => {
+    const context = React.useContext(EditTodoContext);
 
     if (!context) {
-        throw new Error('Missing wrap with EditToDoContext.Provider');
+        throw new Error('Missing wrap with EditTodoContext.Provider');
     }
 
     return context;

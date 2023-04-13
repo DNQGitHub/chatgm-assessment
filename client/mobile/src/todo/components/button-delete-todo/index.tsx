@@ -1,10 +1,10 @@
 import { Button, Modal, Pressable, Text } from 'native-base';
 import React from 'react';
-import { useDeleteToDoContext } from '../../contexts';
+import { useDeleteTodoContext } from '../../contexts';
 
 export const ButtonDeleteTodo = () => {
     const [showModal, setShowModal] = React.useState(false);
-    const { todo, handleConfirm } = useDeleteToDoContext();
+    const { todo, handleConfirm } = useDeleteTodoContext();
 
     return (
         <>

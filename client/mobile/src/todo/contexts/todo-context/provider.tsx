@@ -1,19 +1,27 @@
 import React, { PropsWithChildren } from 'react';
-import { ToDoContext } from '.';
+import { TodoContext } from '@todo/contexts';
+import { AddNewTodoDto, EditTodoDto } from '@todo/dtos';
+import { TodoModel } from '@todo/models';
+import { v4 as Uuid } from 'uuid';
 
-export const ToDoProvider = (props: PropsWithChildren) => {
+export const TodoProvider = (props: PropsWithChildren) => {
     const { children } = props;
-    const [todos, setTodos] = React.useState<Array<{ id: string; name: string; isDone: boolean }>>([]);
+    const [todos, setTodos] = React.useState<Array<TodoModel>>([]);
 
-    const addTodo = (todo: { id: string; name: string; isDone: boolean }) => {
-        setTodos((curTodos) => [todo, ...curTodos]);
+    const addTodo = (dto: AddNewTodoDto) => {
+        const newTodo: TodoModel = {
+            ...dto,
+            id: Uuid(),
+            isDone: false,
+        };
+        setTodos((curTodos) => [newTodo, ...curTodos]);
     };
 
-    const editTodo = (todoId: string, data: { name: string }) => {
+    const editTodo = (todoId: string, dto: EditTodoDto) => {
         setTodos((curTodos) =>
             curTodos.map((i) => {
                 if (i.id == todoId) {
-                    i.name = data.name;
+                    i.name = dto.name;
                 }
 
                 return i;
@@ -38,7 +46,7 @@ export const ToDoProvider = (props: PropsWithChildren) => {
     };
 
     return (
-        <ToDoContext.Provider
+        <TodoContext.Provider
             value={{
                 todos,
                 addTodo,
@@ -48,6 +56,6 @@ export const ToDoProvider = (props: PropsWithChildren) => {
             }}
         >
             {children}
-        </ToDoContext.Provider>
+        </TodoContext.Provider>
     );
 };
