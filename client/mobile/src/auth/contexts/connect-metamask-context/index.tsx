@@ -10,6 +10,8 @@ export enum ConnectMetamaskState {
 export interface ConnectMetamaskContextValue {
     state: ConnectMetamaskState;
     error: string | null | undefined;
+
+    handleConnect: () => Promise<void>;
 }
 
 export const ConnectMetamaskContext = React.createContext<ConnectMetamaskContextValue>(

@@ -1,5 +1,7 @@
 import { useConnectWalletContext } from '@auth/contexts';
+import { ConnectMetamaskProvider } from '@auth/contexts/connect-metamask-context/provider';
 import { Button, Modal, Text, View } from 'native-base';
+import { ButtonConnectMetamask } from '../button-connect-metamask';
 
 export const ButtonConnectWallet = () => {
     const { modalVisible, handleSetModalVisible } = useConnectWalletContext();
@@ -20,9 +22,9 @@ export const ButtonConnectWallet = () => {
                                 <Text color={'white'}>Wallet Connect</Text>
                             </Button>
 
-                            <Button colorScheme={'gray'}>
-                                <Text color={'white'}>Metamask</Text>
-                            </Button>
+                            <ConnectMetamaskProvider>
+                                <ButtonConnectMetamask />
+                            </ConnectMetamaskProvider>
                         </View>
                     </Modal.Body>
                 </Modal.Content>

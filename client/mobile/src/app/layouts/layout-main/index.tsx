@@ -1,7 +1,6 @@
 import { PropsWithChildren } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { Row, Column, Text } from 'native-base';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 import { ButtonConnectWallet } from '@auth/components';
 import { ConnectWalletProvider } from '@auth/contexts/connect-wallet-context/provider';
 
@@ -22,7 +21,7 @@ export const LayoutMain = (props: PropsWithChildren) => {
 
             <Column flex={1}>{children}</Column>
 
-            <StatusBar style="auto" translucent />
+            <StatusBar translucent />
         </SafeAreaView>
     );
 };
