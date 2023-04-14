@@ -1,11 +1,12 @@
 import React from 'react';
 import { Button, Modal, Text, View } from 'native-base';
-import { useMetamaskContext } from '@auth/contexts';
+import { useMetamaskContext, useWalletConnectContext } from '@auth/contexts';
 
 export const ButtonConnectWallet = () => {
     const [modalVisible, setModalVisible] = React.useState(false);
 
     const { handleConnect: handleConnectMetamask } = useMetamaskContext();
+    const { handleConnect: handleConnectWalletConnect } = useWalletConnectContext();
 
     return (
         <>
@@ -19,7 +20,7 @@ export const ButtonConnectWallet = () => {
                     <Modal.Header>Connect Wallet</Modal.Header>
                     <Modal.Body>
                         <View style={{ gap: 12 }}>
-                            <Button colorScheme={'gray'}>
+                            <Button colorScheme={'gray'} onPress={handleConnectWalletConnect}>
                                 <Text color={'white'}>Wallet Connect</Text>
                             </Button>
 
