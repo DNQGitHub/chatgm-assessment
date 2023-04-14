@@ -2,7 +2,6 @@ import { PropsWithChildren } from 'react';
 import { Row, Column, Text } from 'native-base';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { ButtonConnectWallet } from '@auth/components';
-import { ConnectWalletProvider } from '@auth/contexts/connect-wallet-context/provider';
 
 export const LayoutMain = (props: PropsWithChildren) => {
     const { children } = props;
@@ -14,9 +13,7 @@ export const LayoutMain = (props: PropsWithChildren) => {
                     Q's TODO
                 </Text>
 
-                <ConnectWalletProvider>
-                    <ButtonConnectWallet />
-                </ConnectWalletProvider>
+                <ButtonConnectWallet />
             </Row>
 
             <Column flex={1}>{children}</Column>
