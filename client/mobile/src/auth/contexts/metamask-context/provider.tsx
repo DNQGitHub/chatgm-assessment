@@ -10,6 +10,7 @@ import { AuthMethod } from '@auth/models';
 
 const metamaskSdk = new MetaMaskSDK({
     openDeeplink: (link) => {
+        console.log('MetamaskProvider | openDeeplink', { link });
         Linking.openURL(link);
     },
     timer: BackgroundTimer,
@@ -19,7 +20,7 @@ const metamaskSdk = new MetaMaskSDK({
     },
 });
 
-const provider = metamaskSdk.provider;
+const provider = metamaskSdk.getProvider();
 
 export const MetamaskProvider = (props: PropsWithChildren) => {
     const { children } = props;
