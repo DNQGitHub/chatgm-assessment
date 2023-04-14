@@ -1,0 +1,20 @@
+import React from 'react';
+import { Button, IButtonProps, Text } from 'native-base';
+import { useWalletConnectContext } from '@auth/contexts';
+
+export const ButtonWalletConnectDisconnect = (props: IButtonProps) => {
+    const { onPress } = props;
+    const { handleDisconnect } = useWalletConnectContext();
+
+    return (
+        <Button
+            colorScheme={'gray'}
+            onPress={(e) => {
+                handleDisconnect();
+                onPress?.(e);
+            }}
+        >
+            <Text color={'white'}>WalletConnect</Text>
+        </Button>
+    );
+};
