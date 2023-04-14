@@ -1,12 +1,15 @@
 import { Checkbox, FlatList, Row, Text } from 'native-base';
 import { ButtonEditTodo } from '@todo/components/button-edit-todo';
 import { ButtonDeleteTodo } from '@todo/components/button-delete-todo';
-import { useTodoContext } from '@todo/contexts';
 import { EditTodoProvider } from '@todo/contexts/edit-todo-context/provider';
 import { DeleteTodoProvider } from '@todo/contexts/delete-todo-context/provider';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectTodos, todoActions } from '@todo/redux';
 
 export const ListTodos = () => {
-    const { todos, handleCheckTodoDone } = useTodoContext();
+    const todos = useSelector(selectTodos);
+
+    const dispatch = useDispatch();
 
     return (
         <FlatList
@@ -26,7 +29,7 @@ export const ListTodos = () => {
                         <Checkbox
                             value="true"
                             onChange={(checked) => {
-                                handleCheckTodoDone(item.id, checked);
+                                dispatch(todoActions.todoIsDoneUpdated({ todoId: item.id, isDone: checked }));
                             }}
                             accessibilityLabel="Todo checkbox"
                             colorScheme={'gray'}

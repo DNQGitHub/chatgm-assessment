@@ -1,15 +1,14 @@
 import { PropsWithChildren } from 'react';
 import React from 'react';
 import { useFormik } from 'formik';
-import { useTodoContext } from '../todo-context';
 import { EditTodoDto, EditTodoDtoValidationSchema } from '@todo/dtos';
 import { EditTodoContext, EditTodoState } from '@todo/contexts';
 import { TodoModel } from '@todo/models';
+import { useDispatch } from 'react-redux';
+import { todoActions } from '@todo/redux';
 
 export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) => {
     const { children, todo } = props;
-
-    const { handleEditTodo } = useTodoContext();
 
     const [modalVisible, setModalVisible] = React.useState(false);
     const [state, setState] = React.useState(EditTodoState.IDLE);
@@ -24,11 +23,14 @@ export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) 
         validationSchema: new EditTodoDtoValidationSchema(),
     });
 
+    const dispatch = useDispatch();
+
     const handleSubmit = (dto: EditTodoDto) => {
         try {
             setState(() => EditTodoState.SUBMITING);
 
-            handleEditTodo(todo.id, dto);
+            dispatch(todoActions.todoUpdated({ todoId: todo.id, dto }));
+
             setModalVisible(() => false);
 
             setState(() => EditTodoState.SUBMIT_SUCCEEDED);

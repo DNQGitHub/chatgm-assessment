@@ -1,13 +1,14 @@
 import { PropsWithChildren } from 'react';
 import React from 'react';
 import { useFormik } from 'formik';
-import { AddNewTodoContext, AddNewTodoState, useTodoContext } from '@todo/contexts';
+import { AddNewTodoContext, AddNewTodoState } from '@todo/contexts';
 import { AddNewTodoDto, AddNewTodoDtoValidationSchema } from '@todo/dtos';
+import { useDispatch } from 'react-redux';
+import { todoActions } from '@todo/redux';
+import { v4 as Uuid } from 'uuid';
 
 export const AddNewTodoProvider = (props: PropsWithChildren) => {
     const { children } = props;
-
-    const { handleAddTodo } = useTodoContext();
 
     const [modalVisible, setModalVisible] = React.useState(false);
     const [state, setState] = React.useState(AddNewTodoState.IDLE);
@@ -22,11 +23,22 @@ export const AddNewTodoProvider = (props: PropsWithChildren) => {
         validationSchema: new AddNewTodoDtoValidationSchema(),
     });
 
+    const dispatch = useDispatch();
+
     const handleSubmit = (dto: AddNewTodoDto) => {
         try {
             setState(() => AddNewTodoState.SUBMITING);
 
-            handleAddTodo(dto);
+            dispatch(
+                todoActions.newTodoAdded({
+                    newTodo: {
+                        id: Uuid(),
+                        name: dto.name,
+                        isDone: false,
+                    },
+                }),
+            );
+
             form.resetForm();
 
             setState(() => AddNewTodoState.SUBMIT_SUCCEEDED);

@@ -1,22 +1,25 @@
 import { PropsWithChildren } from 'react';
 import React from 'react';
-import { DeleteTodoContext, DeleteTodoState, useTodoContext } from '@todo/contexts';
+import { DeleteTodoContext, DeleteTodoState } from '@todo/contexts';
 import { TodoModel } from '@todo/models';
+import { useDispatch } from 'react-redux';
+import { todoActions } from '@todo/redux';
 
 export const DeleteTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) => {
     const { children, todo } = props;
-
-    const { handleDeleteTodo } = useTodoContext();
 
     const [modalVisible, setModalVisible] = React.useState(false);
     const [state, setState] = React.useState(DeleteTodoState.IDLE);
     const [error, setError] = React.useState<string | null | undefined>(null);
 
+    const dispatch = useDispatch();
+
     const handleConfirm = () => {
         try {
             setState(() => DeleteTodoState.SUBMITING);
 
-            handleDeleteTodo(todo.id);
+            dispatch(todoActions.todoDeleted({ todoId: todo.id }));
+
             setModalVisible(() => false);
 
             setState(() => DeleteTodoState.SUBMIT_SUCCEEDED);

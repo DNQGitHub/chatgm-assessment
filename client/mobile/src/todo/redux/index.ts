@@ -39,4 +39,4 @@ export const todoActions = todoSlice.actions;
 
 export const todoReducer = todoSlice.reducer;
 
-export const selectTodos = (state: any) => state[todoSlice.name].todos;
+export const selectTodos = (state: any): Array<TodoModel> => state[todoSlice.name].todos;
