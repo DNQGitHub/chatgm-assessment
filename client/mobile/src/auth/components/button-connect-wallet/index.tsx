@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Modal, Text, View } from 'native-base';
-import { ButtonConnectMetamask } from '../button-connect-metamask';
 import { useSelector } from 'react-redux';
 import { selectAuth } from '@auth/redux';
 import { useMetamaskContext } from '@auth/contexts';
@@ -9,8 +8,7 @@ export const ButtonConnectWallet = () => {
     const [modalVisible, setModalVisible] = React.useState(false);
     const auth = useSelector(selectAuth);
 
-    const { handleConnect } = useMetamaskContext();
-    console.log('ButtonConnectWallet', { handleConnect });
+    const { handleConnect: handleConnectMetamask } = useMetamaskContext();
 
     if (auth) {
         return (
@@ -38,7 +36,9 @@ export const ButtonConnectWallet = () => {
                                 <Text color={'white'}>Wallet Connect</Text>
                             </Button>
 
-                            <ButtonConnectMetamask />
+                            <Button colorScheme={'gray'} onPress={handleConnectMetamask}>
+                                <Text color={'white'}>Metamask</Text>
+                            </Button>
                         </View>
                     </Modal.Body>
                 </Modal.Content>
