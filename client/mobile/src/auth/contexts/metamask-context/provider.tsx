@@ -73,12 +73,13 @@ export const MetamaskProvider = (props: PropsWithChildren) => {
 
     const handleConnect = async () => {
         try {
+            console.log('handleConnect');
             dispatch(authActions.processRequested({}));
 
             if (!provider.isConnected()) {
                 await provider.request({ method: 'eth_requestAccounts' });
             }
-
+            console.log('handleConnect', { address: provider.selectedAddress, chainId: provider.chainId });
             dispatch(
                 authActions.authSucceeded({
                     auth: {
