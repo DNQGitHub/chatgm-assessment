@@ -4,6 +4,7 @@ export interface MetamaskContextValue {
     provider: any;
 
     handleConnect: () => Promise<void>;
+    handleDisconnect: () => Promise<void>;
 }
 
 export const MetamaskContext = React.createContext<MetamaskContextValue>({} as MetamaskContextValue);

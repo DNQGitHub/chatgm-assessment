@@ -4,6 +4,7 @@ export interface WalletConnectContextValue {
     connector: any;
 
     handleConnect: () => Promise<void>;
+    handleDisconnect: () => Promise<void>;
 }
 
 export const WalletConnectContext = React.createContext<WalletConnectContextValue>({} as WalletConnectContextValue);

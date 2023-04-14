@@ -35,6 +35,11 @@ export const authSlice = createSlice({
             state.auth = auth;
             state.status = AuthStatus.AUTH_SUCCEEDED;
         },
+        resetAuthRequested: (state, { payload, type }: PayloadAction<any>) => {
+            state.auth = undefined;
+            state.error = undefined;
+            state.status = AuthStatus.IDLE;
+        },
     },
 });
 

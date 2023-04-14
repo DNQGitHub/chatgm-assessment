@@ -96,5 +96,13 @@ export const MetamaskProvider = (props: PropsWithChildren) => {
         }
     };
 
-    return <MetamaskContext.Provider value={{ provider, handleConnect }}>{children}</MetamaskContext.Provider>;
+    const handleDisconnect = async () => {
+        dispatch(authActions.resetAuthRequested({}));
+    };
+
+    return (
+        <MetamaskContext.Provider value={{ provider, handleConnect, handleDisconnect }}>
+            {children}
+        </MetamaskContext.Provider>
+    );
 };

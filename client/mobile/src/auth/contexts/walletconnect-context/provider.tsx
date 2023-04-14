@@ -6,24 +6,17 @@ import { useDispatch } from 'react-redux';
 import { authActions } from '@auth/redux';
 import { AuthMethod } from '@auth/models';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import WalletConnect from '@walletconnect/client';
 
 export const WalletConnectProvider = withWalletConnect(
     (props: PropsWithChildren) => {
         const { children } = props;
 
+        const prevConnectorRef = React.useRef<WalletConnect | null>(null);
         const connector = useWalletConnect();
 
-        const dispatch = useDispatch();
-
-        const handleConnect = async () => {
-            try {
-                console.log('handleConnect');
-                dispatch(authActions.processRequested({}));
-
-                if (!connector.connected) {
-                    await connector.connect();
-                }
-                console.log('handleConnect', { address: connector.accounts, chainId: connector.chainId });
+        React.useEffect(() => {
+            if ((!prevConnectorRef.current || !prevConnectorRef.current.connected) && connector.connected) {
                 dispatch(
                     authActions.authSucceeded({
                         auth: {
@@ -33,10 +26,31 @@ export const WalletConnectProvider = withWalletConnect(
                         },
                     }),
                 );
+            }
+
+            if (prevConnectorRef.current != connector) {
+                prevConnectorRef.current = connector;
+            }
+        }, [connector]);
+
+        const dispatch = useDispatch();
+
+        const handleConnect = async () => {
+            try {
+                dispatch(authActions.processRequested({}));
+
+                if (!connector.connected) {
+                    await connector.connect();
+                }
             } catch (error: any) {
                 console.log('handleConnect', { error });
                 dispatch(authActions.authFailed({ error: error.toString() }));
             }
+        };
+
+        const handleDisconnect = async () => {
+            await connector.killSession();
+            dispatch(authActions.resetAuthRequested({}));
         };
 
         return (
@@ -44,6 +58,7 @@ export const WalletConnectProvider = withWalletConnect(
                 value={{
                     connector,
                     handleConnect,
+                    handleDisconnect,
                 }}
             >
                 {children}

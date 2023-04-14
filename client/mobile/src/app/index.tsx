@@ -7,14 +7,14 @@ import { WalletConnectProvider } from '@auth/contexts/walletconnect-context/prov
 
 export const App = () => {
     return (
-        <NativeBaseProvider>
-            <ReduxProvider store={store}>
-                <WalletConnectProvider>
-                    <MetamaskProvider>
+        <ReduxProvider store={store}>
+            <WalletConnectProvider>
+                <MetamaskProvider>
+                    <NativeBaseProvider>
                         <ScreenHome />
-                    </MetamaskProvider>
-                </WalletConnectProvider>
-            </ReduxProvider>
-        </NativeBaseProvider>
+                    </NativeBaseProvider>
+                </MetamaskProvider>
+            </WalletConnectProvider>
+        </ReduxProvider>
     );
 };
