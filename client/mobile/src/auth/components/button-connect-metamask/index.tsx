@@ -1,8 +1,8 @@
-import { useConnectMetamaskContext } from '@auth/contexts';
+import { useMetamaskContext } from '@auth/contexts';
 import { Button, Text } from 'native-base';
 
 export const ButtonConnectMetamask = () => {
-    const { handleConnect } = useConnectMetamaskContext();
+    const { handleConnect } = useMetamaskContext();
 
     return (
         <Button colorScheme={'gray'} onPress={handleConnect}>

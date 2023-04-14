@@ -1,18 +1,30 @@
-import { useConnectWalletContext } from '@auth/contexts';
-import { ConnectMetamaskProvider } from '@auth/contexts/connect-metamask-context/provider';
+import React from 'react';
 import { Button, Modal, Text, View } from 'native-base';
 import { ButtonConnectMetamask } from '../button-connect-metamask';
+import { useSelector } from 'react-redux';
+import { selectAuth } from '@auth/redux';
 
 export const ButtonConnectWallet = () => {
-    const { modalVisible, handleSetModalVisible } = useConnectWalletContext();
+    const [modalVisible, setModalVisible] = React.useState(false);
+    const auth = useSelector(selectAuth);
+
+    if (auth) {
+        return (
+            <Button>
+                <Text color={'white'}>
+                    {auth.blockchainNetwork} : {auth.walletAddress}
+                </Text>
+            </Button>
+        );
+    }
 
     return (
         <>
-            <Button colorScheme={'gray'} onPress={() => handleSetModalVisible(true)}>
+            <Button colorScheme={'gray'} onPress={() => setModalVisible(true)}>
                 <Text color={'white'}>Connect</Text>
             </Button>
 
-            <Modal isOpen={modalVisible} onClose={handleSetModalVisible} colorScheme={'gray'}>
+            <Modal isOpen={modalVisible} onClose={setModalVisible} colorScheme={'gray'}>
                 <Modal.Content>
                     <Modal.CloseButton />
                     <Modal.Header>Connect Wallet</Modal.Header>
@@ -22,9 +34,7 @@ export const ButtonConnectWallet = () => {
                                 <Text color={'white'}>Wallet Connect</Text>
                             </Button>
 
-                            <ConnectMetamaskProvider>
-                                <ButtonConnectMetamask />
-                            </ConnectMetamaskProvider>
+                            <ButtonConnectMetamask />
                         </View>
                     </Modal.Body>
                 </Modal.Content>
