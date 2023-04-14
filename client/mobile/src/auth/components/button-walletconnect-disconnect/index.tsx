@@ -14,7 +14,7 @@ export const ButtonWalletConnectDisconnect = (props: IButtonProps) => {
                 onPress?.(e);
             }}
         >
-            <Text color={'white'}>WalletConnect</Text>
+            <Text color={'white'}>Disconnect</Text>
         </Button>
     );
 };
