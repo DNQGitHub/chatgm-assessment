@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'native-base';
-import { selectAuth } from '@auth/redux';
+import { selectAuth } from '@auth/redux/slices';
 import { useSelector } from 'react-redux';
 
 export const AuthInfo = () => {

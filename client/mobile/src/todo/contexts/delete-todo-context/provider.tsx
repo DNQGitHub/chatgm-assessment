@@ -3,7 +3,7 @@ import React from 'react';
 import { DeleteTodoContext, DeleteTodoState } from '@todo/contexts';
 import { TodoModel } from '@todo/models';
 import { useDispatch } from 'react-redux';
-import { todoActions } from '@todo/redux';
+import { todoActions } from '@todo/redux/slices';
 
 export const DeleteTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) => {
     const { children, todo } = props;

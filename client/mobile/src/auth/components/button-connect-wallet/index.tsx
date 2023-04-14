@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, Text, View } from 'native-base';
 import { useSelector } from 'react-redux';
-import { selectAuth } from '@auth/redux';
+import { selectAuth } from '@auth/redux/slices';
 import { AuthMethod } from '@auth/models';
 import { ButtonWalletConnectDisconnect } from '../button-walletconnect-disconnect';
 import { ButtonMetamaskDisconnect } from '../button-metamask-disconnect';

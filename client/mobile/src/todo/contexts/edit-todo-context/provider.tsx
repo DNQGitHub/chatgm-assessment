@@ -5,7 +5,7 @@ import { EditTodoDto, EditTodoDtoValidationSchema } from '@todo/dtos';
 import { EditTodoContext, EditTodoState } from '@todo/contexts';
 import { TodoModel } from '@todo/models';
 import { useDispatch } from 'react-redux';
-import { todoActions } from '@todo/redux';
+import { todoActions } from '@todo/redux/slices';
 
 export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) => {
     const { children, todo } = props;

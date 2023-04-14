@@ -1,6 +1,6 @@
 import { takeLatest, call } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { authActions } from '@auth/redux';
+import { authActions } from '@auth/redux/slices';
 import { AuthModel } from '@auth/models';
 import { apiClient } from '@api';
 
@@ -19,5 +19,5 @@ function* handleOnAuthSucceded({ payload, type }: PayloadAction<{ auth: AuthMode
 }
 
 export function* authSaga() {
-    yield takeLatest(authActions.authSucceeded, handleOnAuthSucceded);
+    // yield takeLatest(authActions.authSucceeded, handleOnAuthSucceded);
 }

@@ -4,7 +4,7 @@ import { ButtonDeleteTodo } from '@todo/components/button-delete-todo';
 import { EditTodoProvider } from '@todo/contexts/edit-todo-context/provider';
 import { DeleteTodoProvider } from '@todo/contexts/delete-todo-context/provider';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectTodos, todoActions } from '@todo/redux';
+import { selectTodos, todoActions } from '@todo/redux/slices';
 
 export const ListTodos = () => {
     const todos = useSelector(selectTodos);

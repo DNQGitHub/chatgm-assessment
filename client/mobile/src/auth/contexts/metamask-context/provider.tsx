@@ -5,7 +5,7 @@ import { Linking } from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { authActions } from '@auth/redux';
+import { authActions } from '@auth/redux/slices';
 import { AuthMethod } from '@auth/models';
 
 const metamaskSdk = new MetaMaskSDK({

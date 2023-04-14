@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 import { useWalletConnect, withWalletConnect } from '@walletconnect/react-native-dapp';
 import { WalletConnectContext } from '@auth/contexts';
 import { useDispatch } from 'react-redux';
-import { authActions } from '@auth/redux';
+import { authActions } from '@auth/redux/slices';
 import { AuthMethod } from '@auth/models';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import WalletConnect from '@walletconnect/client';

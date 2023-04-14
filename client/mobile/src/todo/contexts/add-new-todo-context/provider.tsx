@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { AddNewTodoContext, AddNewTodoState } from '@todo/contexts';
 import { AddNewTodoDto, AddNewTodoDtoValidationSchema } from '@todo/dtos';
 import { useDispatch } from 'react-redux';
-import { todoActions } from '@todo/redux';
+import { todoActions } from '@todo/redux/slices';
 import { v4 as Uuid } from 'uuid';
 
 export const AddNewTodoProvider = (props: PropsWithChildren) => {
