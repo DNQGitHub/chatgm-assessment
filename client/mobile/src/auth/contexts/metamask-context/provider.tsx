@@ -53,6 +53,7 @@ export const MetamaskProvider = (props: PropsWithChildren) => {
         provider.on('message', handleOnMessage);
 
         return () => {
+            console.log('----aaaa');
             if (provider.removeListener) {
                 provider.removeListener('connect', handleOnConnect);
                 provider.removeListener('disconnect', handleOnDisconnect);
