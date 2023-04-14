@@ -8,11 +8,11 @@ import { AuthInfo } from '@auth/components/auth-info';
 export const ScreenHome = () => {
     return (
         <LayoutMain>
-            <View flex={1} marginBottom={16}>
+            <View marginY={'16px'} paddingX={'20px'}>
                 <AuthInfo />
             </View>
 
-            <View flex={1} marginBottom={16}>
+            <View flex={1} marginBottom={'16px'}>
                 <ListTodos />
             </View>
 
