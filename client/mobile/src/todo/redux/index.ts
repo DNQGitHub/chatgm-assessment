@@ -16,7 +16,7 @@ export const todoSlice = createSlice({
     reducers: {
         newTodoAdded: (state, { payload, type }: PayloadAction<{ newTodo: TodoModel }>) => {
             const { newTodo } = payload;
-            state.todos = [newTodo, ...state.todos];
+            state.todos.unshift(newTodo);
         },
         todoUpdated: (state, { payload, type }: PayloadAction<{ todoId: string; dto: EditTodoDto }>) => {
             const { todoId, dto } = payload;
