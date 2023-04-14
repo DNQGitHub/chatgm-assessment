@@ -31,7 +31,7 @@ export const AddNewTodoProvider = (props: PropsWithChildren) => {
 
             setState(() => AddNewTodoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {
-            console.log(error)
+            console.log(error);
             setError(error.toString());
             setState(() => AddNewTodoState.SUBMIT_FAILED);
         }

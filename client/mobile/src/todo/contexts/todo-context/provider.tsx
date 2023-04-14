@@ -3,10 +3,14 @@ import { TodoContext } from '@todo/contexts';
 import { AddNewTodoDto, EditTodoDto } from '@todo/dtos';
 import { TodoModel } from '@todo/models';
 import { v4 as Uuid } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectTodos, todoActions } from '@todo/redux';
 
 export const TodoProvider = (props: PropsWithChildren) => {
     const { children } = props;
-    const [todos, setTodos] = React.useState<Array<TodoModel>>([]);
+    // const [todos, setTodos] = React.useState<Array<TodoModel>>([]);
+    const dispatch = useDispatch();
+    const todos = useSelector(selectTodos);
 
     const handleAddTodo = (dto: AddNewTodoDto) => {
         const newTodo: TodoModel = {
@@ -14,35 +18,40 @@ export const TodoProvider = (props: PropsWithChildren) => {
             id: Uuid(),
             isDone: false,
         };
-        setTodos((curTodos) => [newTodo, ...curTodos]);
+
+        dispatch(todoActions.newTodoAdded({ newTodo }));
+        // setTodos((curTodos) => [newTodo, ...curTodos]);
     };
 
     const handleEditTodo = (todoId: string, dto: EditTodoDto) => {
-        setTodos((curTodos) =>
-            curTodos.map((i) => {
-                if (i.id == todoId) {
-                    i.name = dto.name;
-                }
+        dispatch(todoActions.todoUpdated({ todoId, dto }));
+        // setTodos((curTodos) =>
+        //     curTodos.map((i) => {
+        //         if (i.id == todoId) {
+        //             i.name = dto.name;
+        //         }
 
-                return i;
-            }),
-        );
+        //         return i;
+        //     }),
+        // );
     };
 
     const handleDeleteTodo = (todoId: string) => {
-        setTodos((curTodos) => curTodos.filter((i) => i.id != todoId));
+        dispatch(todoActions.todoDeleted({ todoId }));
+        // setTodos((curTodos) => curTodos.filter((i) => i.id != todoId));
     };
 
     const handleCheckTodoDone = (todoId: string, done: boolean) => {
-        setTodos((curTodos) =>
-            curTodos.map((i) => {
-                if (i.id == todoId) {
-                    i.isDone = done;
-                }
+        dispatch(todoActions.todoIsDoneUpdated({ todoId, isDone: done }));
+        // setTodos((curTodos) =>
+        //     curTodos.map((i) => {
+        //         if (i.id == todoId) {
+        //             i.isDone = done;
+        //         }
 
-                return i;
-            }),
-        );
+        //         return i;
+        //     }),
+        // );
     };
 
     return (
