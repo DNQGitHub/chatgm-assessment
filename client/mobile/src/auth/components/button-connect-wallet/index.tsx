@@ -1,24 +1,11 @@
 import React from 'react';
 import { Button, Modal, Text, View } from 'native-base';
-import { useSelector } from 'react-redux';
-import { selectAuth } from '@auth/redux';
 import { useMetamaskContext } from '@auth/contexts';
 
 export const ButtonConnectWallet = () => {
     const [modalVisible, setModalVisible] = React.useState(false);
-    const auth = useSelector(selectAuth);
 
     const { handleConnect: handleConnectMetamask } = useMetamaskContext();
-
-    if (auth) {
-        return (
-            <Button>
-                <Text color={'white'}>
-                    {auth.blockchainNetwork} : {auth.walletAddress}
-                </Text>
-            </Button>
-        );
-    }
 
     return (
         <>
