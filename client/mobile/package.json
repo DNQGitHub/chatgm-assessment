@@ -6,7 +6,7 @@
         "android": "react-native run-android",
         "ios": "react-native run-ios",
         "start": "react-native start",
-        "test:unit-test": "jest",
+        "test:unit-test": "jest unit-test.ts",
         "test:e2e:ios": "npx detox test --configuration ios.sim.debug",
         "lint": "eslint .",
         "postinstall": "node ./scripts/postinstall.js"
