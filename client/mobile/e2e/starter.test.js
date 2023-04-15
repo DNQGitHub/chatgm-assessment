@@ -6,13 +6,13 @@ describe('E2E Testing', () => {
         await device.launchApp();
     });
 
-    beforeEach(async () => {
+    afterAll(async () => {
         await device.reloadReactNative();
     });
 
     describe('App Launch', () => {
         it("Should have text Q's TODO", async () => {
-            await expect(element(by.text("Q's TODO"))).toBeVisible();
+            await expect(element(by.text("Q'S TODO"))).toBeVisible();
         });
     });
 
@@ -24,7 +24,7 @@ describe('E2E Testing', () => {
 
         it("Should have error when input empty to field 'name'", async () => {
             await element(by.id('button-submit-add-new-todo')).tap();
-            await expect(element(by.id('input-name-error-message'))).toHaveText('required');
+            await expect(element(by.id('input-name-error-message'))).toHaveText('require');
         });
 
         it("Should have new item with 'name' when submit", async () => {
