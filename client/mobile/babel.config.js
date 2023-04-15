@@ -17,6 +17,7 @@ module.exports = {
                     '.json',
                 ],
                 alias: {
+                    '@api': './src/api',
                     '@app': './src/app',
                     '@auth': './src/auth',
                     '@todo': './src/todo',
