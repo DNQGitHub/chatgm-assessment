@@ -1,10 +1,16 @@
 import { Button, FormControl, Input, Modal, Pressable, Text, View } from 'native-base';
 import React from 'react';
-import { useEditTodoContext } from '@todo/contexts';
+import { EditTodoState, useEditTodoContext } from '@todo/contexts';
 
 export const ButtonEditTodo = () => {
     const [modalVisible, setModalVisible] = React.useState(false);
-    const { form } = useEditTodoContext();
+    const { form, state } = useEditTodoContext();
+
+    React.useEffect(() => {
+        if (state == EditTodoState.SUBMIT_SUCCEEDED) {
+            setModalVisible(false);
+        }
+    }, [state]);
 
     return (
         <>

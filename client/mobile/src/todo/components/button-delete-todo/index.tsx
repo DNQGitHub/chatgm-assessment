@@ -1,10 +1,16 @@
 import { Button, Modal, Pressable, Text } from 'native-base';
 import React from 'react';
-import { useDeleteTodoContext } from '@todo/contexts';
+import { DeleteTodoState, useDeleteTodoContext } from '@todo/contexts';
 
 export const ButtonDeleteTodo = () => {
     const [modalVisible, setModalVisible] = React.useState(false);
-    const { todo, handleConfirm } = useDeleteTodoContext();
+    const { todo, state, handleConfirm } = useDeleteTodoContext();
+
+    React.useEffect(() => {
+        if (state == DeleteTodoState.SUBMIT_SUCCEEDED) {
+            setModalVisible(false);
+        }
+    }, [state]);
 
     return (
         <>
