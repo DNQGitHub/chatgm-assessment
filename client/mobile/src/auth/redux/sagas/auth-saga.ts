@@ -18,6 +18,6 @@ function* handleOnAuthSucceded({ payload }: PayloadAction<{ auth: AuthModel }>) 
     }
 }
 
-export default function* authSaga() {
+export function* authSaga() {
     yield takeLatest(authActions.authSucceeded, handleOnAuthSucceded);
 }

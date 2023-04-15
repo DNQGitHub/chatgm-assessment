@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { authReducer, authSlice } from '@auth/redux/slices';
 import { todoReducer, todoSlice } from '@todo/redux/slices';
-import appSaga from './sagas/app-saga';
+import { appSaga } from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
