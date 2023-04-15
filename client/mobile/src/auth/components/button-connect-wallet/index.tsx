@@ -15,7 +15,9 @@ export const ButtonConnectWallet = () => {
 
     if (auth && auth.method == AuthMethod.CONNECT_WALLETCONNECT) {
         return <ButtonWalletConnectDisconnect />;
-    } else if (auth && auth.method == AuthMethod.CONNECT_METAMASK) {
+    }
+
+    if (auth && auth.method == AuthMethod.CONNECT_METAMASK) {
         return <ButtonMetamaskDisconnect />;
     }
 
