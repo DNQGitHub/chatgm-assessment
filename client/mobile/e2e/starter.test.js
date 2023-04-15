@@ -1,14 +1,13 @@
 describe('E2E Testing', () => {
     const ITEM_NAME = 'Item 1';
-    const ITEM_UPDATED_NAME = 'Item 1 - Update';
 
     beforeAll(async () => {
         await device.launchApp();
     });
 
-    afterAll(async () => {
-        await device.reloadReactNative();
-    });
+    // afterAll(async () => {
+    //     await device.reloadReactNative();
+    // });
 
     describe('App Launch', () => {
         it("Should have text Q's TODO", async () => {
@@ -24,12 +23,13 @@ describe('E2E Testing', () => {
 
         it("Should have error when input empty to field 'name'", async () => {
             await element(by.id('button-submit-add-new-todo')).tap();
-            await expect(element(by.id('input-name-error-message'))).toHaveText('require');
+            await expect(element(by.text('name is a required field'))).toBeVisible();
         });
 
         it("Should have new item with 'name' when submit", async () => {
             await element(by.id('input-name')).typeText(ITEM_NAME);
             await element(by.id('button-submit-add-new-todo')).tap();
+            await element(by.id('button-cancel-add-new-todo')).tap();
             await expect(element(by.text(ITEM_NAME))).toBeVisible();
         });
     });
@@ -41,9 +41,9 @@ describe('E2E Testing', () => {
         });
 
         it("Should have item with 'name' when submit", async () => {
-            await element(by.id('input-name')).typeText(ITEM_UPDATED_NAME);
+            await element(by.id('input-name-1')).typeText(` - Update`);
             await element(by.id('button-submit-edit-todo')).tap();
-            await expect(element(by.text(ITEM_UPDATED_NAME))).toBeVisible();
+            await expect(element(by.text(`${ITEM_NAME} - Update`))).toExist();
         });
     });
 
@@ -54,8 +54,8 @@ describe('E2E Testing', () => {
         });
 
         it("Should have no item with 'name' when submit", async () => {
-            await element(by.id('button-submit-delete-todo')).tap();
-            await expect(element(by.text(ITEM_UPDATED_NAME))).toBeVisible();
+            await element(by.id('button-confirm-delete-todo')).tap();
+            await expect(element(by.text(`${ITEM_NAME} - Update`))).not.toBeVisible();
         });
     });
 });
