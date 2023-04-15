@@ -16,7 +16,7 @@ export const ScreenHome = () => {
                 <ListTodos />
             </View>
 
-            <View position={'absolute'} right={30} bottom={30}>
+            <View position={'absolute'} right={'20px'} bottom={30}>
                 <AddNewTodoProvider>
                     <ButtonAddNewTodo />
                 </AddNewTodoProvider>

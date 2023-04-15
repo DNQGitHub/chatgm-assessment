@@ -9,6 +9,7 @@ export const ButtonWalletConnectConnect = (props: IButtonProps) => {
     return (
         <Button
             colorScheme={'gray'}
+            shadow={'5'}
             onPress={(e) => {
                 handleConnect();
                 onPress?.(e);

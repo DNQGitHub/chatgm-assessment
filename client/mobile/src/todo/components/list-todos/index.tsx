@@ -15,15 +15,15 @@ export const ListTodos = () => {
         <FlatList
             paddingX={'20px'}
             data={todos}
-            renderItem={({ item }: any) => (
+            renderItem={({ item, index }: any) => (
                 <Row
                     flexDirection={'row'}
                     justifyContent={'space-between'}
-                    borderWidth={1}
                     paddingX={'16px'}
                     paddingY={'20px'}
+                    backgroundColor={'gray.100'}
                     borderRadius={4}
-                    marginBottom={'8px'}
+                    marginBottom={index == todos.length - 1 ? '64px' : '8px'}
                 >
                     <Row flexDirection={'row'} style={{ gap: 8 }}>
                         <Checkbox

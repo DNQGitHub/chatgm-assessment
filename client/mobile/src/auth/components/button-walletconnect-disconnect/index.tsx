@@ -9,6 +9,7 @@ export const ButtonWalletConnectDisconnect = (props: IButtonProps) => {
     return (
         <Button
             colorScheme={'gray'}
+            shadow={'5'}
             onPress={(e) => {
                 handleDisconnect();
                 onPress?.(e);

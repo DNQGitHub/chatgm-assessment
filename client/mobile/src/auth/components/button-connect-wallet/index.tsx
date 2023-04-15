@@ -23,7 +23,7 @@ export const ButtonConnectWallet = () => {
 
     return (
         <>
-            <Button colorScheme={'gray'} onPress={() => setModalVisible(true)}>
+            <Button colorScheme={'gray'} shadow={'5'} onPress={() => setModalVisible(true)}>
                 <Text color={'white'}>Connect</Text>
             </Button>
 
