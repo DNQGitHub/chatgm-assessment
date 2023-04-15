@@ -15,9 +15,6 @@ export interface AddNewTodoContextValue {
     state: AddNewTodoState;
     error: string | null | undefined;
     form: AddNewTodoForm;
-    modalVisible: boolean;
-
-    handleSetModalVisible: (visible: boolean) => void;
 }
 
 export const AddNewTodoContext = React.createContext<AddNewTodoContextValue>({} as AddNewTodoContextValue);

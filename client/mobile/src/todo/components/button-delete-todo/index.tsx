@@ -3,15 +3,16 @@ import React from 'react';
 import { useDeleteTodoContext } from '@todo/contexts';
 
 export const ButtonDeleteTodo = () => {
-    const { todo, modalVisible, handleConfirm, handleSetModalVisible } = useDeleteTodoContext();
+    const [modalVisible, setModalVisible] = React.useState(false);
+    const { todo, handleConfirm } = useDeleteTodoContext();
 
     return (
         <>
-            <Pressable onPress={() => handleSetModalVisible(true)}>
+            <Pressable onPress={() => setModalVisible(true)}>
                 <Text style={{ textDecorationLine: 'underline' }}>Delete</Text>
             </Pressable>
 
-            <Modal isOpen={modalVisible} onClose={handleSetModalVisible} colorScheme={'gray'}>
+            <Modal isOpen={modalVisible} onClose={setModalVisible} colorScheme={'gray'}>
                 <Modal.Content>
                     <Modal.CloseButton />
                     <Modal.Header>Delete Todo</Modal.Header>
@@ -26,7 +27,7 @@ export const ButtonDeleteTodo = () => {
                                 variant="ghost"
                                 colorScheme="blueGray"
                                 onPress={() => {
-                                    handleSetModalVisible(false);
+                                    setModalVisible(false);
                                 }}
                             >
                                 Cancel

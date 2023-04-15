@@ -10,7 +10,6 @@ import { todoActions } from '@todo/redux/slices';
 export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) => {
     const { children, todo } = props;
 
-    const [modalVisible, setModalVisible] = React.useState(false);
     const [state, setState] = React.useState(EditTodoState.IDLE);
     const [error, setError] = React.useState<string | null | undefined>(null);
     const form = useFormik<EditTodoDto>({
@@ -31,17 +30,11 @@ export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) 
 
             dispatch(todoActions.todoUpdated({ todoId: todo.id, dto }));
 
-            setModalVisible(() => false);
-
             setState(() => EditTodoState.SUBMIT_SUCCEEDED);
         } catch (error: any) {
             setError(error.toString());
             setState(() => EditTodoState.SUBMIT_FAILED);
         }
-    };
-
-    const handleSetModalVisible = (visible: boolean) => {
-        setModalVisible(() => visible);
     };
 
     return (
@@ -50,9 +43,6 @@ export const EditTodoProvider = (props: PropsWithChildren<{ todo: TodoModel }>) 
                 state,
                 error,
                 form,
-                modalVisible,
-
-                handleSetModalVisible,
             }}
         >
             {children}

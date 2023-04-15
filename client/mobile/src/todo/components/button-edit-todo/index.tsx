@@ -3,15 +3,16 @@ import React from 'react';
 import { useEditTodoContext } from '@todo/contexts';
 
 export const ButtonEditTodo = () => {
-    const { form, modalVisible, handleSetModalVisible } = useEditTodoContext();
+    const [modalVisible, setModalVisible] = React.useState(false);
+    const { form } = useEditTodoContext();
 
     return (
         <>
-            <Pressable onPress={() => handleSetModalVisible(true)}>
+            <Pressable onPress={() => setModalVisible(true)}>
                 <Text style={{ textDecorationLine: 'underline' }}>Edit</Text>
             </Pressable>
 
-            <Modal isOpen={modalVisible} onClose={handleSetModalVisible} colorScheme={'gray'}>
+            <Modal isOpen={modalVisible} onClose={setModalVisible} colorScheme={'gray'}>
                 <Modal.Content>
                     <Modal.CloseButton />
                     <Modal.Header>Edit Todo</Modal.Header>
@@ -30,7 +31,7 @@ export const ButtonEditTodo = () => {
                                 variant="ghost"
                                 colorScheme="blueGray"
                                 onPress={() => {
-                                    handleSetModalVisible(false);
+                                    setModalVisible(false);
                                 }}
                             >
                                 Cancel

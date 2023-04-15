@@ -1,17 +1,18 @@
-import { Button, Text, View, Modal, FormControl, Input } from 'native-base';
 import React from 'react';
 import { useAddNewTodoContext } from '@todo/contexts';
+import { Button, Text, View, Modal, FormControl, Input } from 'native-base';
 
 export const ButtonAddNewTodo = () => {
-    const { form, modalVisible, handleSetModalVisible } = useAddNewTodoContext();
+    const [modalVisible, setModalVisible] = React.useState(false);
+    const { form } = useAddNewTodoContext();
 
     return (
         <>
-            <Button colorScheme={'gray'} onPress={() => handleSetModalVisible(true)}>
+            <Button colorScheme={'gray'} onPress={() => setModalVisible(true)}>
                 <Text color="white">+ New Todo</Text>
             </Button>
 
-            <Modal isOpen={modalVisible} onClose={handleSetModalVisible} colorScheme={'gray'}>
+            <Modal isOpen={modalVisible} onClose={setModalVisible} colorScheme={'gray'}>
                 <Modal.Content>
                     <Modal.CloseButton />
                     <Modal.Header>Add New Todo</Modal.Header>
@@ -30,7 +31,7 @@ export const ButtonAddNewTodo = () => {
                                 variant="ghost"
                                 colorScheme="blueGray"
                                 onPress={() => {
-                                    handleSetModalVisible(false);
+                                    setModalVisible(false);
                                 }}
                             >
                                 Cancel
