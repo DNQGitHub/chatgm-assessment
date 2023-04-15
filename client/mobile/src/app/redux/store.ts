@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { authReducer, authSlice } from '@auth/redux/slices';
 import { todoReducer, todoSlice } from '@todo/redux/slices';
-import { appSaga } from './sagas';
+import appSaga from './sagas/app-saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -11,7 +11,7 @@ export const store = configureStore({
         [authSlice.name]: authReducer,
         [todoSlice.name]: todoReducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([sagaMiddleware]),
 });
 
 sagaMiddleware.run(appSaga);
