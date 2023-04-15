@@ -37,7 +37,7 @@ npm run test:e2e:ios
 
 ## Demo ##
 
-...
+[Demo Video](./demo.MOV)
 
 ## Explain test method decision ##
 
