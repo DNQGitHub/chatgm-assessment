@@ -8,7 +8,12 @@ export const ButtonAddNewTodo = () => {
 
     return (
         <>
-            <Button colorScheme={'gray'} shadow={'5'} onPress={() => setModalVisible(true)}>
+            <Button
+                testID="button-add-new-todo"
+                colorScheme={'gray'}
+                shadow={'5'}
+                onPress={() => setModalVisible(true)}
+            >
                 <Text color="white">+ New Todo</Text>
             </Button>
 
@@ -20,14 +25,21 @@ export const ButtonAddNewTodo = () => {
                         <View>
                             <FormControl isInvalid={!!form.errors.name}>
                                 <FormControl.Label>Name</FormControl.Label>
-                                <Input onChangeText={form.handleChange('name')} value={form.values.name} />
-                                <FormControl.ErrorMessage>{form.errors.name}</FormControl.ErrorMessage>
+                                <Input
+                                    testID="input-name"
+                                    onChangeText={form.handleChange('name')}
+                                    value={form.values.name}
+                                />
+                                <FormControl.ErrorMessage testID="input-name-error-message">
+                                    {form.errors.name}
+                                </FormControl.ErrorMessage>
                             </FormControl>
                         </View>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button.Group space={2}>
                             <Button
+                                testID="button-cancel-add-new-todo"
                                 variant="ghost"
                                 colorScheme="blueGray"
                                 onPress={() => {
@@ -37,6 +49,7 @@ export const ButtonAddNewTodo = () => {
                                 Cancel
                             </Button>
                             <Button
+                                testID="button-submit-add-new-todo"
                                 colorScheme={'gray'}
                                 onPress={() => {
                                     form.handleSubmit();

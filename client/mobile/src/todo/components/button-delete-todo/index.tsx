@@ -14,7 +14,7 @@ export const ButtonDeleteTodo = () => {
 
     return (
         <>
-            <Pressable onPress={() => setModalVisible(true)}>
+            <Pressable testID="button-delete-todo" onPress={() => setModalVisible(true)}>
                 <Text style={{ textDecorationLine: 'underline' }}>Delete</Text>
             </Pressable>
 
@@ -30,6 +30,7 @@ export const ButtonDeleteTodo = () => {
                     <Modal.Footer>
                         <Button.Group space={2}>
                             <Button
+                                testID="button-cancel-delete-todo"
                                 variant="ghost"
                                 colorScheme="blueGray"
                                 onPress={() => {
@@ -39,6 +40,7 @@ export const ButtonDeleteTodo = () => {
                                 Cancel
                             </Button>
                             <Button
+                                testID="button-confirm-delete-todo"
                                 colorScheme={'gray'}
                                 onPress={() => {
                                     handleConfirm();

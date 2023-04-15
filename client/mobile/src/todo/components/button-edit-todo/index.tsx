@@ -14,7 +14,7 @@ export const ButtonEditTodo = () => {
 
     return (
         <>
-            <Pressable onPress={() => setModalVisible(true)}>
+            <Pressable testID="button-edit-todo" onPress={() => setModalVisible(true)}>
                 <Text style={{ textDecorationLine: 'underline' }}>Edit</Text>
             </Pressable>
 
@@ -26,7 +26,11 @@ export const ButtonEditTodo = () => {
                         <View>
                             <FormControl isInvalid={!!form.errors.name}>
                                 <FormControl.Label>Name</FormControl.Label>
-                                <Input onChangeText={form.handleChange('name')} value={form.values.name} />
+                                <Input
+                                    testID="input-name"
+                                    onChangeText={form.handleChange('name')}
+                                    value={form.values.name}
+                                />
                                 <FormControl.ErrorMessage>{form.errors.name}</FormControl.ErrorMessage>
                             </FormControl>
                         </View>
@@ -34,6 +38,7 @@ export const ButtonEditTodo = () => {
                     <Modal.Footer>
                         <Button.Group space={2}>
                             <Button
+                                testID="button-cancel-edit-todo"
                                 variant="ghost"
                                 colorScheme="blueGray"
                                 onPress={() => {
@@ -43,6 +48,7 @@ export const ButtonEditTodo = () => {
                                 Cancel
                             </Button>
                             <Button
+                                testID="button-submit-edit-todo"
                                 colorScheme={'gray'}
                                 onPress={() => {
                                     form.handleSubmit();

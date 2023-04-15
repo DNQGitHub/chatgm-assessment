@@ -1,23 +1,61 @@
-describe('Example', () => {
-  beforeAll(async () => {
-    await device.launchApp();
-  });
+describe('E2E Testing', () => {
+    const ITEM_NAME = 'Item 1';
+    const ITEM_UPDATED_NAME = 'Item 1 - Update';
 
-  beforeEach(async () => {
-    await device.reloadReactNative();
-  });
+    beforeAll(async () => {
+        await device.launchApp();
+    });
 
-  it('should have welcome screen', async () => {
-    await expect(element(by.id('welcome'))).toBeVisible();
-  });
+    beforeEach(async () => {
+        await device.reloadReactNative();
+    });
 
-  it('should show hello screen after tap', async () => {
-    await element(by.id('hello_button')).tap();
-    await expect(element(by.text('Hello!!!'))).toBeVisible();
-  });
+    describe('App Launch', () => {
+        it("Should have text Q's TODO", async () => {
+            await expect(element(by.text("Q's TODO"))).toBeVisible();
+        });
+    });
 
-  it('should show world screen after tap', async () => {
-    await element(by.id('world_button')).tap();
-    await expect(element(by.text('World!!!'))).toBeVisible();
-  });
+    describe('Add New Todo', () => {
+        it("Should have modal 'Add New Todo' visible", async () => {
+            await element(by.id('button-add-new-todo')).tap();
+            await expect(element(by.text('Add New Todo'))).toBeVisible();
+        });
+
+        it("Should have error when input empty to field 'name'", async () => {
+            await element(by.id('button-submit-add-new-todo')).tap();
+            await expect(element(by.id('input-name-error-message'))).toHaveText('required');
+        });
+
+        it("Should have new item with 'name' when submit", async () => {
+            await element(by.id('input-name')).typeText(ITEM_NAME);
+            await element(by.id('button-submit-add-new-todo')).tap();
+            await expect(element(by.text(ITEM_NAME))).toBeVisible();
+        });
+    });
+
+    describe('Edit Todo', () => {
+        it("Should have modal 'Edit Todo' visible", async () => {
+            await element(by.id('button-edit-todo')).tap();
+            await expect(element(by.text('Edit Todo'))).toBeVisible();
+        });
+
+        it("Should have item with 'name' when submit", async () => {
+            await element(by.id('input-name')).typeText(ITEM_UPDATED_NAME);
+            await element(by.id('button-submit-edit-todo')).tap();
+            await expect(element(by.text(ITEM_UPDATED_NAME))).toBeVisible();
+        });
+    });
+
+    describe('Delete Todo', () => {
+        it("Should have modal 'Delete Todo' visible", async () => {
+            await element(by.id('button-delete-todo')).tap();
+            await expect(element(by.text('Delete Todo'))).toBeVisible();
+        });
+
+        it("Should have no item with 'name' when submit", async () => {
+            await element(by.id('button-submit-delete-todo')).tap();
+            await expect(element(by.text(ITEM_UPDATED_NAME))).toBeVisible();
+        });
+    });
 });
